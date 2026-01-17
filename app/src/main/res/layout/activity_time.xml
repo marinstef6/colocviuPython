@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="60dp"
+    tools:context=".TimeActivity">
+
+    <EditText
+        android:id="@+id/server_ip_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Server IP (PC)"/>
+
+    <EditText
+        android:id="@+id/server_port_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Port (ex 5000)"
+        android:inputType="number"/>
+
+    <Button
+        android:id="@+id/connect_time_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect"/>
+
+    <TextView
+        android:id="@+id/time_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="--:--:--"
+        android:textSize="28sp"
+        android:paddingTop="16dp"/>
+</LinearLayout>
