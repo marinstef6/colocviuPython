@@ -49,14 +49,15 @@ public class DictionaryThread extends Thread {
 
             // cerință: trimite către client DOAR prima definiție
             Intent intent = new Intent(Constants.ACTION_DICT);
+            intent.setPackage(context.getPackageName());   // <<< IMPORTANT
             intent.putExtra(Constants.EXTRA_DEF, definition);
             context.sendBroadcast(intent);
-
         } catch (Exception e) {
-            Log.e(Constants.TAG, "Dictionary error: " + e.getMessage());
             Intent intent = new Intent(Constants.ACTION_DICT);
+            intent.setPackage(context.getPackageName());   // <<< IMPORTANT
             intent.putExtra(Constants.EXTRA_DEF, "ERROR: " + e.getMessage());
             context.sendBroadcast(intent);
+
         }
     }
 
