@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.content.*;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.*;
 import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override public void onReceive(Context context, Intent intent) {
             String def = intent.getStringExtra(Constants.EXTRA_DEF);
+            Log.i(Constants.TAG, "[UI] RECEIVED DEF=" + def);
             definitionTextView.setText(def == null ? "" : def);
         }
     };
@@ -42,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
             }
             definitionTextView.setText("Loading...");
             new DictionaryThread(this, word).start();
+            IntentFilter filter = new IntentFilter(Constants.ACTION_DICT);
+
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+                registerReceiver(receiver, filter, Context.RECEIVER_NOT_EXPORTED);
+            } else {
+                registerReceiver(receiver, filter);
+            }
+
         });
 
         timeButton.setOnClickListener(v -> startActivity(new Intent(this, TimeActivity.class)));
